@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MARS Pitch",
+  title: "NOTHING X MARS Deck 001",
   description:
-    "A lean cultural pitch: collaborators, scenes, and production vision—scroll through the deck.",
+    "Pitch deck 001 — NOTHING X MARS. Collaborators, scenes, and production vision.",
 };
 
 export const viewport: Viewport = {
