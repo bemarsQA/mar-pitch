@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "mars-pitch",
-  description: "A scroll-snapping pitch deck web app.",
+  title: "MARS Pitch",
+  description:
+    "A lean cultural pitch: collaborators, scenes, and production vision—scroll through the deck.",
 };
 
 export const viewport: Viewport = {
