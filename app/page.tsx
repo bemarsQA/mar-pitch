@@ -317,7 +317,8 @@ const narrative: NarrativeSection[] = [
     media: {
       type: "fullBleed",
       image: {
-        src: "/images/execution_hero.png",
+        /** Bump `?v=` when replacing the file so browsers / image CDN don’t reuse an old derivative. */
+        src: "/images/execution_hero.png?v=2",
         alt: "Execution hero",
         objectFit: "contain",
       },
