@@ -1014,14 +1014,14 @@ function Section({
                       style={{ aspectRatio: cssAspect, border: "1px solid var(--border)" }}
                     >
                       <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                        <Image
+        <Image
                           src={heroPath}
                           alt={alt}
                           fill
                           sizes="(min-width: 768px) 50vw, 100vw"
                           className="object-cover"
-                          priority
-                        />
+          priority
+        />
                       </div>
                       {section.collaborator.variant === "primary" && section.collaborator.confirmed ? (
                         <ConfirmedHeroRibbon lang={lang} />
