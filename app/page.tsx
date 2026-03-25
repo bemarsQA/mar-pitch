@@ -317,7 +317,7 @@ const narrative: NarrativeSection[] = [
     media: {
       type: "fullBleed",
       image: {
-        src: "/images/execution_hero.jpg",
+        src: "/images/execution_hero.png",
         alt: "Execution hero",
         objectFit: "contain",
       },
