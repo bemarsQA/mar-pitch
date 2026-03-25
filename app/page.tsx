@@ -37,6 +37,10 @@ type NarrativeSection = {
     instagramFollowers?: number | null;
     /** If set, an * appears after the count with this text in a hover/focus popover. */
     instagramFollowersFootnote?: string;
+    /** Minimal status for primary collaborators (e.g. confirmed shoot). */
+    confirmed?: boolean;
+    /** Thin editorial line above the block (e.g. first slide in a section). */
+    sectionBanner?: { en: string; jp: string };
   };
   media?: {
     type: "fullBleed" | "carousel" | "split";
@@ -135,6 +139,61 @@ function FollowerBadgeOverlay({
         </div>
       </div>
     </div>
+  );
+}
+
+function RollingChevrons({ mirror }: { mirror?: boolean }) {
+  return (
+    <span className={`inline-flex gap-px ${mirror ? "scale-x-[-1]" : ""}`} aria-hidden>
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="text-[11px] font-light leading-none text-white"
+          animate={{ opacity: [0.35, 1, 0.35], y: [0, -2, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 1.6,
+            ease: "easeInOut",
+            delay: i * 0.18,
+          }}
+        >
+          ›
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+/** Red corner ribbon on confirmed primary collaborator heroes (sits above image, not clipped). */
+function ConfirmedHeroRibbon({ lang }: { lang: Language }) {
+  const label = lang === "jp" ? "確定" : "CONFIRMED";
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{
+        type: "tween",
+        duration: 1.35,
+        delay: 0.28,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="pointer-events-none absolute right-0 top-0 z-[25]"
+    >
+      <div
+        className="flex items-center gap-1.5 rounded-bl-xl px-2.5 py-1.5 md:gap-2 md:px-3 md:py-2"
+        style={{
+          background: "linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%)",
+          boxShadow: "0 4px 18px rgba(0,0,0,0.3)",
+        }}
+      >
+        <RollingChevrons />
+        <span className="text-[9px] font-semibold uppercase tracking-[0.28em] text-white md:text-[10px]">
+          {label}
+        </span>
+        <RollingChevrons mirror />
+      </div>
+    </motion.div>
   );
 }
 
@@ -285,10 +344,6 @@ const narrative: NarrativeSection[] = [
     jp: [],
     collaborator: {
       variant: "primary",
-      groupTitle: {
-        en: "COLLABORATORS / POSSIBLE SHOOTS",
-        jp: "コラボレーター / 可能性のある撮影",
-      },
       handle: "@ii_ten_ten",
       instagramUrl: "https://www.instagram.com/ii_ten_ten/",
       location: { en: "Osaka", jp: "大阪" },
@@ -308,6 +363,7 @@ const narrative: NarrativeSection[] = [
       heroImage: { filename: "tenten_hero.jpg.jpg", aspect: "4:5" },
       instagramFollowers: 2015,
       instagramFollowersFootnote: "Brand owner's follower count.",
+      confirmed: true,
     },
   },
   {
@@ -317,24 +373,32 @@ const narrative: NarrativeSection[] = [
     jp: [],
     collaborator: {
       variant: "primary",
-      handle: "@coilvintage",
-      instagramUrl: "https://www.instagram.com/coilvintage/",
-      location: { en: "Kyoto", jp: "京都" },
-      role: { en: "Select shop", jp: "セレクトショップ" },
+      groupTitle: {
+        en: "COLLABORATORS / POSSIBLE SHOOTS",
+        jp: "コラボレーター / 可能性のある撮影",
+      },
+      handle: "@tk10.poscakun",
+      instagramUrl: "https://www.instagram.com/tk10.poscakun/",
+      location: { en: "Kameoka, Kyoto", jp: "亀岡、京都" },
+      role: {
+        en: "Graffiti / posca artist · skater",
+        jp: "グラフィティ／ポスカアーティスト・スケーター",
+      },
       why: {
-        en: "A curated space shaping a more structured, fashion-driven identity. Places like this define visual language and taste.",
-        jp: "キュレーションされた空間が、スタイルを形づくる。視覚的な基準となる場所。",
+        en: "A multidisciplinary artist working across graffiti, illustration, and skate culture.\nRepresents a raw, street-level perspective within Japanese youth culture.",
+        jp: "グラフィティ、ポスカ、スケートを横断して活動するアーティスト。\nストリートに根ざしたユースカルチャーの視点を体現する存在。",
       },
       commercial: {
-        en: "Sewing inside the space.\nFocused, working by hand.\n\nMusic through the headphones.\nSubtle movement with the rhythm.",
-        jp: "空間の中で縫い物をする。\n手元に集中し、作業を進める。\n\nヘッドホンから音楽。\nリズムに合わせてわずかに体が動く。",
+        en: "Drawing or painting with posca markers.\nListening to music while.\nSkate part optional.",
+        jp: "ポスカで描く、またはペイントする。\n音楽を聴きながら作業する。\nスケートパート（オプション）",
       },
       photo: {
         en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
-        jp: "被写体と環境、プロダクトが日常の空間に自然に馴染む様子を写した一連の画像。",
+        jp: "人物・空間・プロダクトの関係性を捉え、自然にその環境や日常に溶け込む様子を写した複数のイメージ。",
       },
-      heroImage: { filename: "coil_hero.png", aspect: "4:5" },
-      instagramFollowers: 4925,
+      heroImage: { filename: "taketo_hero.jpg", aspect: "4:5" },
+      instagramFollowers: 48400,
+      confirmed: true,
     },
   },
   {
@@ -344,6 +408,10 @@ const narrative: NarrativeSection[] = [
     jp: [],
     collaborator: {
       variant: "primary",
+      groupTitle: {
+        en: "COLLABORATORS / POSSIBLE SHOOTS",
+        jp: "コラボレーター / 可能性のある撮影",
+      },
       handle: "@exo0.13",
       instagramUrl: "https://www.instagram.com/exo0.13/",
       location: { en: "Tokyo", jp: "東京" },
@@ -362,6 +430,7 @@ const narrative: NarrativeSection[] = [
       },
       heroImage: { filename: "exo013_hero.jpg", aspect: "4:5" },
       instagramFollowers: 33000,
+      confirmed: true,
     },
   },
   {
@@ -371,6 +440,10 @@ const narrative: NarrativeSection[] = [
     jp: [],
     collaborator: {
       variant: "primary",
+      groupTitle: {
+        en: "COLLABORATORS / POSSIBLE SHOOTS",
+        jp: "コラボレーター / 可能性のある撮影",
+      },
       handle: "@m_i_t_a_m_e",
       instagramUrl: "https://www.instagram.com/m_i_t_a_m_e/",
       location: { en: "Tokyo (Shinjuku)", jp: "東京（新宿）" },
@@ -416,6 +489,25 @@ const narrative: NarrativeSection[] = [
         jp: "",
       },
       heroImage: { filename: "skate_hero.jpg", aspect: "16:9" },
+    },
+  },
+  {
+    id: "talk-coil",
+    label: "OPTIONAL",
+    en: [],
+    jp: [],
+    collaborator: {
+      variant: "optional",
+      groupTitle: { en: "OPTIONAL / IN TALKS", jp: "オプショナル / 検討中" },
+      handle: "@coilvintage",
+      instagramUrl: "https://www.instagram.com/coilvintage/",
+      location: { en: "Kyoto", jp: "京都" },
+      role: { en: "", jp: "" },
+      why: { en: "", jp: "" },
+      commercial: { en: "", jp: "" },
+      photo: { en: "", jp: "" },
+      heroImage: { filename: "coil_hero.png", aspect: "4:5" },
+      instagramFollowers: 4925,
     },
   },
   {
@@ -693,6 +785,8 @@ function Section({
 
   if (section.collaborator) {
     const isMitame = section.collaborator.handle === "@m_i_t_a_m_e";
+    const isWideHandle =
+      section.collaborator.handle === "@m_i_t_a_m_e" || section.collaborator.handle === "@tk10.poscakun";
     const roleText = lang === "jp" ? section.collaborator.role.jp : section.collaborator.role.en;
     const isTbd = section.collaborator.instagramUrl === "TBD";
 
@@ -709,6 +803,17 @@ function Section({
               section.collaborator.variant === "optional" ? "opacity-75" : "opacity-100",
             ].join(" ")}
           >
+            {section.collaborator.sectionBanner ? (
+              <div
+                className="mb-3 border-t border-[var(--border)] pt-3 text-[10px] font-medium uppercase tracking-[0.28em]"
+                style={{ color: "var(--muted)" }}
+              >
+                {lang === "jp"
+                  ? section.collaborator.sectionBanner.jp
+                  : section.collaborator.sectionBanner.en}
+              </div>
+            ) : null}
+
             <div className="mb-3 flex flex-col gap-1.5">
               {section.collaborator.groupTitle ? (
                 <div className="text-[11px] font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
@@ -741,7 +846,7 @@ function Section({
                   transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
                   className={[
                     "inline-block",
-                    isMitame ? "whitespace-nowrap max-w-none break-normal" : "max-w-[12rem] whitespace-normal break-all",
+                    isWideHandle ? "whitespace-nowrap max-w-none break-normal" : "max-w-[12rem] whitespace-normal break-all",
                     "leading-[1.0] font-semibold tracking-[-0.02em]",
                     "underline decoration-transparent underline-offset-4 transition-[transform,opacity,decoration-color] duration-200",
                     "group-hover:decoration-[var(--accent)]/70 group-hover:translate-x-[1px] group-focus:decoration-[var(--accent)]/70",
@@ -872,17 +977,22 @@ function Section({
                         whileTap={{ scale: 0.99 }}
                         viewport={{ once: true, amount: 0.28 }}
                         transition={{ type: "spring", stiffness: 110, damping: 18, mass: 0.9 }}
-                        className="relative overflow-hidden rounded-2xl"
+                        className="relative rounded-2xl"
                         style={{ aspectRatio: cssAspect, border: "1px solid var(--border)" }}
                       >
-                        <Image
-                          src={heroPath}
-                          alt={alt}
-                          fill
-                          sizes="(min-width: 768px) 50vw, 100vw"
-                          className="object-cover"
-                          priority
-                        />
+                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                          <Image
+                            src={heroPath}
+                            alt={alt}
+                            fill
+                            sizes="(min-width: 768px) 50vw, 100vw"
+                            className="object-cover"
+                            priority
+                          />
+                        </div>
+                        {section.collaborator.variant === "primary" && section.collaborator.confirmed ? (
+                          <ConfirmedHeroRibbon lang={lang} />
+                        ) : null}
                         {showFollowerBadge && typeof followers === "number" ? (
                           <FollowerBadgeOverlay
                             count={followers}
@@ -900,17 +1010,22 @@ function Section({
                       whileTap={{ scale: 0.99 }}
                       viewport={{ once: true, amount: 0.28 }}
                       transition={{ type: "spring", stiffness: 110, damping: 18, mass: 0.9 }}
-                      className="relative overflow-hidden rounded-2xl"
+                      className="relative rounded-2xl"
                       style={{ aspectRatio: cssAspect, border: "1px solid var(--border)" }}
                     >
-                      <Image
-                        src={heroPath}
-                        alt={alt}
-                        fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
-                        className="object-cover"
-                        priority
-                      />
+                      <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                        <Image
+                          src={heroPath}
+                          alt={alt}
+                          fill
+                          sizes="(min-width: 768px) 50vw, 100vw"
+                          className="object-cover"
+                          priority
+                        />
+                      </div>
+                      {section.collaborator.variant === "primary" && section.collaborator.confirmed ? (
+                        <ConfirmedHeroRibbon lang={lang} />
+                      ) : null}
                     </motion.div>
                   )}
                 </div>
