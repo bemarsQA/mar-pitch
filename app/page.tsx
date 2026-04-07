@@ -358,7 +358,7 @@ const narrative: NarrativeSection[] = [
         jp: "タトゥーは、長く残る自己表現。時間をかけて形になる。",
       },
       commercial: {
-        en: "Sewing inside the space.\nFocused, working by hand.\n\nMusic through the headphones.\nSubtle movement with the rhythm.",
+        en: "Iterating inside the space.\nFocused, working by hand.\n\nShowing the artist utilizing the phone throughout the process.\nSubtle movement with the rhythm of the machine.",
         jp: "空間の中で縫い物をする。\n手元に集中し、作業を進める。\n\nヘッドホンから音楽。\nリズムに合わせてわずかに体が動く。",
       },
       photo: {
@@ -391,15 +391,15 @@ const narrative: NarrativeSection[] = [
         jp: "グラフィティ／ポスカアーティスト・スケーター",
       },
       why: {
-        en: "A multidisciplinary artist working across graffiti, illustration, and skate culture.\nRepresents a raw, street-level perspective within Japanese youth culture.",
+        en: "A multidisciplinary artist across graffiti, illustration, and skate culture.\nThe phone sits at the center of that street-level workflow: references, captures, and review in motion.",
         jp: "グラフィティ、ポスカ、スケートを横断して活動するアーティスト。\nストリートに根ざしたユースカルチャーの視点を体現する存在。",
       },
       commercial: {
-        en: "Drawing or painting with posca markers.\nListening to music while.\nSkate part optional.",
+        en: "Artist spray painting various poster.\nUsing phone for references and quick captures while working.\nSkate part using the phone to film.",
         jp: "ポスカで描く、またはペイントする。\n音楽を聴きながら作業する。\nスケートパート（オプション）",
       },
       photo: {
-        en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
+        en: "A series of images capturing the subject, their environment, and phone-led moments as the product naturally integrates into their space and routine.",
         jp: "人物・空間・プロダクトの関係性を捉え、自然にその環境や日常に溶け込む様子を写した複数のイメージ。",
       },
       shootDate: { en: "April 10", jp: "4月10日" },
