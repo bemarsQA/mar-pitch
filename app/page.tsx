@@ -41,6 +41,10 @@ type NarrativeSection = {
     confirmed?: boolean;
     /** Thin editorial line above the block (e.g. first slide in a section). */
     sectionBanner?: { en: string; jp: string };
+    /** Planned shoot date display. */
+    shootDate?: { en: string; jp: string };
+    /** Product/story focus for the shoot. */
+    focus?: { en: string; jp: string };
   };
   media?: {
     type: "fullBleed" | "carousel" | "split";
@@ -345,13 +349,13 @@ const narrative: NarrativeSection[] = [
     jp: [],
     collaborator: {
       variant: "primary",
-      handle: "@ii_ten_ten",
-      instagramUrl: "https://www.instagram.com/ii_ten_ten/",
-      location: { en: "Osaka", jp: "大阪" },
-      role: { en: "DIY artist / crochet brand", jp: "DIYアーティスト / クロシェブランド" },
+      handle: "@exo0.13",
+      instagramUrl: "https://www.instagram.com/exo0.13/",
+      location: { en: "Tokyo", jp: "東京" },
+      role: { en: "Tattoo artist / studio", jp: "タトゥーアーティスト / スタジオ" },
       why: {
-        en: "A small-scale creator within Kansai’s independent craft scene. DIY remains a core form of youth expression in Japan.",
-        jp: "関西のインディペンデントなクラフトシーンで活動。DIYは今もユースカルチャーに根付く表現のひとつ。",
+        en: "Tattoo culture reflects long-term identity. Ideas developed slowly, then carried forward.",
+        jp: "タトゥーは、長く残る自己表現。時間をかけて形になる。",
       },
       commercial: {
         en: "Sewing inside the space.\nFocused, working by hand.\n\nMusic through the headphones.\nSubtle movement with the rhythm.",
@@ -361,9 +365,10 @@ const narrative: NarrativeSection[] = [
         en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
         jp: "被写体と環境、プロダクトが日常の空間に自然に馴染む様子を写した一連の画像。",
       },
-      heroImage: { filename: "tenten_hero.jpg.jpg", aspect: "4:5" },
-      instagramFollowers: 2015,
-      instagramFollowersFootnote: "Brand owner's follower count.",
+      shootDate: { en: "April 14", jp: "4月14日" },
+      focus: { en: "Base Phone Blue", jp: "Base Phone Blue" },
+      heroImage: { filename: "exo013_hero.jpg", aspect: "4:5" },
+      instagramFollowers: 33000,
       confirmed: true,
     },
   },
@@ -397,6 +402,8 @@ const narrative: NarrativeSection[] = [
         en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
         jp: "人物・空間・プロダクトの関係性を捉え、自然にその環境や日常に溶け込む様子を写した複数のイメージ。",
       },
+      shootDate: { en: "April 10", jp: "4月10日" },
+      focus: { en: "Pro Phone Black", jp: "Pro Phone Black" },
       heroImage: { filename: "taketo_hero.jpg", aspect: "4:5" },
       instagramFollowers: 48400,
       confirmed: true,
@@ -413,13 +420,13 @@ const narrative: NarrativeSection[] = [
         en: "COLLABORATORS / POSSIBLE SHOOTS",
         jp: "コラボレーター / 可能性のある撮影",
       },
-      handle: "@exo0.13",
-      instagramUrl: "https://www.instagram.com/exo0.13/",
-      location: { en: "Tokyo", jp: "東京" },
-      role: { en: "Tattoo artist / studio", jp: "タトゥーアーティスト / スタジオ" },
+      handle: "@ii_ten_ten",
+      instagramUrl: "https://www.instagram.com/ii_ten_ten/",
+      location: { en: "Osaka", jp: "大阪" },
+      role: { en: "DIY artist / crochet brand", jp: "DIYアーティスト / クロシェブランド" },
       why: {
-        en: "Tattoo culture reflects long-term identity. Ideas developed slowly, then carried forward.",
-        jp: "タトゥーは、長く残る自己表現。時間をかけて形になる。",
+        en: "A small-scale creator within Kansai’s independent craft scene. DIY remains a core form of youth expression in Japan.",
+        jp: "関西のインディペンデントなクラフトシーンで活動。DIYは今もユースカルチャーに根付く表現のひとつ。",
       },
       commercial: {
         en: "Sewing inside the space.\nFocused, working by hand.\n\nMusic through the headphones.\nSubtle movement with the rhythm.",
@@ -429,8 +436,11 @@ const narrative: NarrativeSection[] = [
         en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
         jp: "被写体と環境、プロダクトが日常の空間に自然に馴染む様子を写した一連の画像。",
       },
-      heroImage: { filename: "exo013_hero.jpg", aspect: "4:5" },
-      instagramFollowers: 33000,
+      shootDate: { en: "April 20", jp: "4月20日" },
+      focus: { en: "Headphone Yellow and/or Any Phone", jp: "Headphone Yellow and/or Any Phone" },
+      heroImage: { filename: "tenten_hero.jpg.jpg", aspect: "4:5" },
+      instagramFollowers: 2015,
+      instagramFollowersFootnote: "Brand owner's follower count.",
       confirmed: true,
     },
   },
@@ -890,6 +900,38 @@ function Section({
                   style={{ color: "var(--muted)" }}
                 >
                   {roleText}
+                </div>
+              ) : null}
+
+              {section.collaborator.variant === "primary" &&
+              (section.collaborator.shootDate || section.collaborator.focus) ? (
+                <div
+                  className="mt-2 rounded-lg border px-3 py-2"
+                  style={{
+                    borderColor: "color-mix(in srgb, var(--border) 75%, transparent)",
+                    background: "color-mix(in srgb, var(--bg-alt) 72%, transparent)",
+                  }}
+                >
+                  {section.collaborator.shootDate ? (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.24em]" style={{ color: "var(--text)" }}>
+                        {lang === "jp" ? "撮影日" : "Shoot Date"}
+                      </span>
+                      <span className="text-[12px] uppercase tracking-[0.18em]" style={{ color: "var(--muted)" }}>
+                        {lang === "jp" ? section.collaborator.shootDate.jp : section.collaborator.shootDate.en}
+                      </span>
+                    </div>
+                  ) : null}
+                  {section.collaborator.focus ? (
+                    <div className="mt-1 flex items-baseline gap-2">
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.24em]" style={{ color: "var(--text)" }}>
+                        {lang === "jp" ? "フォーカス" : "Focus"}
+                      </span>
+                      <span className="text-[12px] uppercase tracking-[0.18em]" style={{ color: "var(--muted)" }}>
+                        {lang === "jp" ? section.collaborator.focus.jp : section.collaborator.focus.en}
+                      </span>
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
             </div>
