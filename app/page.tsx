@@ -359,7 +359,7 @@ const narrative: NarrativeSection[] = [
       },
       commercial: {
         en: "Iterating inside the space.\nFocused, working by hand.\n\nShowing the artist utilizing the phone throughout the process.\nSubtle movement with the rhythm of the machine.",
-        jp: "空間の中で縫い物をする。\n手元に集中し、作業を進める。\n\nヘッドホンから音楽。\nリズムに合わせてわずかに体が動く。",
+        jp: "空間の中で試行錯誤を重ねる。\n手元に集中し、作業を進める。\n\n制作の流れの中で、アーティストがスマートフォンを活用する様子を見せる。\nマシンのリズムに合わせて、わずかに体が動く。",
       },
       photo: {
         en: "A series of images capturing the subject, their environment, and how the product naturally integrates into their space and routine.",
@@ -392,15 +392,15 @@ const narrative: NarrativeSection[] = [
       },
       why: {
         en: "A multidisciplinary artist across graffiti, illustration, and skate culture.\nThe phone sits at the center of that street-level workflow: references, captures, and review in motion.",
-        jp: "グラフィティ、ポスカ、スケートを横断して活動するアーティスト。\nストリートに根ざしたユースカルチャーの視点を体現する存在。",
+        jp: "グラフィティ、イラスト、スケートカルチャーを横断して活動するマルチディシプリナリーなアーティスト。\nそのストリートの制作フローの中心にあるのがスマートフォン。リファレンス確認、撮影、移動しながらのレビューを担う。",
       },
       commercial: {
         en: "Artist spray painting various poster.\nUsing phone for references and quick captures while working.\nSkate part using the phone to film.",
-        jp: "ポスカで描く、またはペイントする。\n音楽を聴きながら作業する。\nスケートパート（オプション）",
+        jp: "複数のポスターにスプレーペイントを施す。\n制作中にスマートフォンでリファレンス確認とクイック撮影を行う。\nスケートパートではスマートフォンで撮影する。",
       },
       photo: {
         en: "A series of images capturing the subject, their environment, and phone-led moments as the product naturally integrates into their space and routine.",
-        jp: "人物・空間・プロダクトの関係性を捉え、自然にその環境や日常に溶け込む様子を写した複数のイメージ。",
+        jp: "被写体とその環境、そしてスマートフォン主導の瞬間を捉えるシリーズ。\nプロダクトが空間と日常に自然に溶け込む様子を描く。",
       },
       shootDate: { en: "April 10", jp: "4月10日" },
       focus: { en: "Pro Phone Black", jp: "Pro Phone Black" },
